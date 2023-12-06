@@ -23,11 +23,12 @@ class auth extends CI_Controller {
 			      $data  = $q->row_array();
 
 			       if ($count>=1) {
+			       	$this->session->set_userdata('level',$data['level']); 
 			       	$this->session->set_userdata('data',$data); 
 			       	$this->session->set_userdata('username',$data); 
 			      	$this->session->set_flashdata('msg', 'true');
 			      	redirect('home','refresh');
-			       	echo "sasas";
+
 			      }else{
 			      	$this->session->set_flashdata('msg', 'false');
 			      	redirect('login','refresh');

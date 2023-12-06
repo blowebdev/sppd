@@ -40,6 +40,55 @@ class sppd extends CI_Controller {
 		$data['halaman'] = 'master/set_penugasan';
 		$this->load->view('home',$data);
 	}
+	public function pelaporan()
+	{
+		$this->cek_login();
+		$data['halaman'] = 'master/pelaporan';
+		$this->load->view('home',$data);
+	}
+	public function set_pelapoan()
+	{
+		$this->cek_login();
+		$data['halaman'] = 'master/set_pelapoan';
+		$this->load->view('home',$data);
+	}
+	public function save_deskripsi_pelapoan(){
+		$this->cek_login();
+		$data = array(
+			'deskripsi_laporan'=>$_REQUEST['deskripsi']
+		);
+		$this->db->where(array('id_pegawai'=>$_REQUEST['id_pegawai'], 'id_agenda'=>$_REQUEST['id_agenda']));
+		$exc = $this->db->update('m_penugasan',$data);
+
+		if ($exc) {
+			$alert['alert'] = '
+			<div class="alert alert-success alert-dismissible" role="alert">
+			<div class="alert-message">
+			<strong>Perhatian !! Data berhasil disimpan</strong>
+			</div>
+			</div>
+			';
+			$this->session->set_flashdata('alert',$alert);
+			redirect('sppd/set_pelapoan?id_agenda='.$_REQUEST['id_agenda']."&id_pegawai=".$_REQUEST['id_pegawai'],'refresh');
+			
+		}else{
+			$alert['alert'] = '
+			<div class="alert alert-danger alert-dismissible" role="alert">
+			<div class="alert-message">
+			<strong>Perhatian !! Data gagal disimpan</strong>
+			</div>
+			</div>
+			';
+			$this->session->set_flashdata('alert',$alert);
+			redirect('sppd/set_pelapoan?id_agenda='.$_REQUEST['id_agenda']."&id_pegawai=".$_REQUEST['id_pegawai'],'refresh');
+		}
+	}
+	public function report()
+	{
+		$this->cek_login();
+		$data['halaman'] = 'master/report';
+		$this->load->view('home',$data);
+	}
 	public function cetak_sppd()
 	{
 		$this->cek_login();

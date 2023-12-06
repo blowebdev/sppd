@@ -46,6 +46,18 @@ if(isset($_SESSION['alert'])){
             <input type="text" name="nomor_surat" value="<?php echo @$rows['nomor_surat']; ?>" class="form-control" required>
           </div>
         </div>
+         <div class="form-group">
+          <label for="inputtext3" class="col-sm-2 control-label">Tanggal Surat</label>
+          <div class="col-sm-10">
+            <input type="date" name="tanggal_surat" value="<?php echo @$rows['tanggal_surat']; ?>" class="form-control" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputtext3" class="col-sm-2 control-label">Perihal Surat</label>
+          <div class="col-sm-10">
+            <input type="text" name="perihal" value="<?php echo @$rows['perihal']; ?>" class="form-control" required>
+          </div>
+        </div>
         <div class="form-group">
           <label for="inputtext3" class="col-sm-2 control-label">Tempat</label>
           <div class="col-sm-10">

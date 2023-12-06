@@ -46,6 +46,8 @@ class agenda extends CI_Controller {
 			'nomor_surat' => $_REQUEST['nomor_surat'],
 			'tanggal_selesai' => $_REQUEST['tanggal_selesai'],
 			'deskripsi' => $_REQUEST['deskripsi'],
+			'tanggal_surat' => $_REQUEST['tanggal_surat'],
+			'perihal' => $_REQUEST['perihal'],
 			'status' => 'proses',
 		);
 

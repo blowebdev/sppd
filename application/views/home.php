@@ -23,18 +23,14 @@
     <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" /> -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/non_responsive.css" />
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/plugins/smart.wizard/smart_wizard_theme_arrows.min.css" />
-    <link rel="stylesheet" href="<?php echo base_url(); ?>editor/jquery.cleditor.css" />
     <script type="text/javascript" src="https://unpkg.com/intro.js/minified/intro.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/intro.js/minified/introjs.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Default theme -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/modal.css" />
 
     <link href="<?php echo base_url(); ?>assets/css/plugins/perfect-scrollbar.min.css" rel="stylesheet" />
-    <link href="<?php echo base_url(); ?>assets/css/plugins/apexcharts.min.css" rel="stylesheet" />
     <style type="text/css">
         .badge2 {
             display: inline-block;
@@ -155,28 +151,20 @@
             </div>
         </div>
         <script src="<?php echo base_url(); ?>assets/js/plugins/jquery-3.3.1.min.js"></script>
-        <script src="<?php echo base_url(); ?>js/dknotus-tour.js"></script>
         <script src="<?php echo base_url(); ?>assets/js/plugins/bootstrap.bundle.min.js"></script>
-        <script src="<?php echo base_url(); ?>js/action.js"></script>
         <script src="<?php echo base_url(); ?>assets/js/plugins/perfect-scrollbar.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/js/scripts/script.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/js/scripts/sidebar.large.script.min.js"></script>
         
-        <script src="<?php echo base_url(); ?>assets/js/plugins/jquery.smartWizard.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/js/scripts/smart.wizard.script.min.js"></script>
-        <script src="<?php echo base_url(); ?>chart/canvasjs.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-        <script src="<?php echo base_url(); ?>assets/js/scripts/tooltip.script.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
 
         <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
         <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-        <script src="<?php echo base_url(); ?>js/dataTables.fixedColumns.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/js/modal.js"></script>
-        <script src="<?php echo base_url(); ?>/assets/js/plugins/apexcharts.min.js"></script>
-        <script src="<?php echo base_url(); ?>/assets/js/plugins/apexcharts.dataseries.js"></script>
-        <script src="<?php echo base_url(); ?>/assets/js/scripts/apexBarChart.script.min.js"></script>
+        <script src="//js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+        <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
+        <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+                        
         <script>
             $(document).ready(function() {
                 $('#pd').select2();
@@ -185,6 +173,81 @@
                 $('#jabatan').select2();
                 $('[data-toggle="tooltip"]').tooltip();
                 $("[data-toggle=popover]").popover();
+
+                 <?php 
+                 setlocale(LC_ALL, 'IND');
+                 $_REQUEST['tgl_awal'] = date("Y-m-d", strtotime("-31 days", strtotime(date('Y-m-d'))));;
+                 $_REQUEST['tgl_akhir'] = date('Y-m-d');
+                function dateRange( $first, $last, $step = '+1 day', $format = 'Y-m-d' ) {
+                    $dates = [];
+                    $current = strtotime( $first );
+                    $last = strtotime( $last );
+
+                    while( $current <= $last ) {
+                        $dates[] = date( $format, $current );
+                        $current = strtotime( $step, $current );
+                    }
+
+                    return $dates;
+                }
+                if($_REQUEST['tgl_awal']) : 
+                    $tgl_awal  = $_REQUEST['tgl_awal'];
+                    $tgl_akhir = $_REQUEST['tgl_akhir'];
+                    $daterange = dateRange($tgl_awal, $tgl_akhir); 
+                    ?>
+                    window.onload = function () {
+                        var chart = new CanvasJS.Chart("chartContainer", {
+                            theme:"dark1",
+                            animationEnabled: true,
+                            title:{
+                                text: "Statistik agenda SPPD 1 bulan Terakhir",
+                                fontSize: 20,
+                                padding: {
+                                  bottom : 40
+                                }
+                            },
+                            axisY :{
+                                title: "Jumlah",
+                                suffix: ""
+                            },
+                            toolTip: {
+                                shared: "true"
+                            },
+                            legend:{
+                                cursor:"pointer",
+                                itemclick : toggleDataSeries
+                            },
+                            data: [{
+                                type: "column",
+                                visible: true,
+                                showInLegend: true,
+                                yValueFormatString: "## Agenda",
+                                name: "Agenda",
+                                dataPoints: [
+                                    <?php 
+                                    foreach($daterange as $date){
+                                        $res = $this->db->query("SELECT COUNT(*) as jumlah FROM m_agenda 
+                                                                        WHERE date(tanggal_mulai)>='".$date."' AND date(tanggal_mulai)<='".$date."'
+                                                                        ")->row_array();
+                                    ?>
+                                        { label: '<?php echo date('d M',strtotime($date)); ?>', y: <?php echo empty($res['jumlah']) ? 0 : $res['jumlah'];?> },
+                                    <?php } ?>
+                                    ]
+                            }]
+                        });
+                        chart.render();
+                        function toggleDataSeries(e) {
+                            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+                                e.dataSeries.visible = false;
+                            } else {
+                                e.dataSeries.visible = true;
+                            }
+                            chart.render();
+                        }
+
+                    }
+
+                <?php endif;?>
            });
            $(document).ready(function() {
                 $('#datatable2').DataTable({
@@ -214,15 +277,7 @@
 
         </script>
 
-        <script type="text/javascript">
-           // Tour.run([
-           //      {
-           //        element: $('#tour3897')
-           //      }
-           //    ]);
-           //  Tour.close();
-        </script>
-        
+
 
 </body>
 </html>
