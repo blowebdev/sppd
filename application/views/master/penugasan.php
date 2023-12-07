@@ -22,6 +22,7 @@
       <th>Tanggal Mulai</th>
       <th>Tanggal Selesai</th>
       <th>Pegawai Yang Ditugaskan</th>
+      <th>File Surat</th>
       <th>Status</th>
       <th>Aksi</th>
     </tr>
@@ -40,6 +41,9 @@
         <td><?=$data['tanggal_mulai']?></td>
         <td><?=$data['tanggal_selesai']?></td>
         <td><?php echo $totPenugasan; ?> Pegawai</td>
+        <td>
+          <a class="btn btn-info" href="<?php echo base_url() ?>file_surat/<?php echo @$data['file']; ?>"><i class="fa fa-cloud-download"></i></a>
+        </td>
         <td><?=(@$data['status']=='proses') ? "<label class='text-warning'>PROSES</label>": "<label class='text-success'>SELESAI</label>";?></td>
         <td nowrap="">
           <?php  if(in_array($_SESSION['level'],array('1'))) : ?>

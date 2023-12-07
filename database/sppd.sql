@@ -11,7 +11,7 @@
  Target Server Version : 100427
  File Encoding         : 65001
 
- Date: 06/12/2023 11:09:48
+ Date: 07/12/2023 15:56:23
 */
 
 SET NAMES utf8mb4;
@@ -32,13 +32,14 @@ CREATE TABLE `m_agenda`  (
   `nomor_surat` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `tanggal_surat` date NULL DEFAULT NULL,
   `perihal` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `file` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
   UNIQUE INDEX `id`(`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of m_agenda
 -- ----------------------------
-INSERT INTO `m_agenda` VALUES (1, 'Kegiatan MGMP SMN 1 MOJOWARNO', 'proses', '2023-12-05 13:21:00', '2023-12-06 15:00:00', 'SMPN MOJOWARNO', 'Tes Coba', 'XX1/SJJ/SA/SASA', '2023-12-05', 'Undangan');
+INSERT INTO `m_agenda` VALUES (1, 'Kegiatan MGMP SMN 1 MOJOWARNO', 'proses', '2023-12-05 13:21:00', '2023-12-06 15:00:00', 'SMPN MOJOWARNO', 'Tes Coba', 'XX1/SJJ/SA/SASA', '2023-12-05', 'Undangan', 'Keterisian_Monev_November_Tanggal_07-12-2023_Jam_10_30_34.pdf');
 
 -- ----------------------------
 -- Table structure for m_pegawai
@@ -79,13 +80,13 @@ CREATE TABLE `m_penugasan`  (
   `deskripsi_laporan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `id`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of m_penugasan
 -- ----------------------------
-INSERT INTO `m_penugasan` VALUES (5, '160', 1, '                                                                            Deskripsi Hasil Pertemuan : Coa isi ISIAN                                          ');
-INSERT INTO `m_penugasan` VALUES (6, '161', 1, '               Deskripsi Hasil Pertemuan :              ');
+INSERT INTO `m_penugasan` VALUES (7, '160', 1, NULL);
+INSERT INTO `m_penugasan` VALUES (8, '161', 1, NULL);
 
 -- ----------------------------
 -- Table structure for m_users

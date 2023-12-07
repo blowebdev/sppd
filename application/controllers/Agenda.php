@@ -39,6 +39,26 @@ class agenda extends CI_Controller {
 	{
 		$this->load->library('session');
 		$this->cek_login();
+		$config['upload_path']          = './file_surat/';
+		$config['allowed_types']        = 'pdf';
+		$config['max_size']             = 80000;
+		$config['max_width']            = 10000;
+		$config['max_height']           = 10000;
+		$this->load->library('upload', $config);
+
+		if($_FILES['file']['name']!="") {
+			if (!$this->upload->do_upload('file')){
+				echo $this->upload->display_errors();
+			}else{
+				$upload_data=$this->upload->data();
+				$file=(empty($upload_data['file_name'])) ? "-" : $upload_data['file_name'];
+			}
+		}else{
+			$file = $_REQUEST['file_lama'];
+		}
+
+		$set_file = (!empty($file)) ? $file : 'NULL';
+
 		$data = array(
 			'agenda' => $_REQUEST['agenda'],
 			'tempat' => $_REQUEST['tempat'],
@@ -48,6 +68,7 @@ class agenda extends CI_Controller {
 			'deskripsi' => $_REQUEST['deskripsi'],
 			'tanggal_surat' => $_REQUEST['tanggal_surat'],
 			'perihal' => $_REQUEST['perihal'],
+			'file' => $set_file,
 			'status' => 'proses',
 		);
 

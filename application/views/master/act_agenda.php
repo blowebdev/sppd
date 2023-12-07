@@ -59,6 +59,18 @@ if(isset($_SESSION['alert'])){
           </div>
         </div>
         <div class="form-group">
+          <label for="inputtext3" class="col-sm-2 control-label">Upload File Surat</label>
+          <div class="col-sm-10">
+            <?php if(!empty($_REQUEST['id'])) : ?>
+            <input type="file" name="file" class="form-control">
+            <input type="hidden" value="<?php echo @$rows['file']; ?>" name="file_lama" class="form-control">
+            <a href="<?php echo base_url() ?>file_surat/<?php echo @$rows['file']; ?>"><?php echo @$rows['file']; ?></a>
+            <?php else : ?>
+            <input type="file" name="file" class="form-control" required>
+            <?php endif;  ?>
+          </div>
+        </div>
+        <div class="form-group">
           <label for="inputtext3" class="col-sm-2 control-label">Tempat</label>
           <div class="col-sm-10">
             <input type="text" name="tempat" value="<?php echo @$rows['tempat']; ?>" class="form-control" required>

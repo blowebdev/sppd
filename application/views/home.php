@@ -136,7 +136,7 @@
                             <div class="dropdown-header">
                                 <i class="i-Lock-User mr-1"></i><b><?php echo $this->session->userdata('username')['nama']; ?></b>
                             </div>
-                            <a class="dropdown-item" href="logout">Logout</a>
+                            <a class="dropdown-item" href="<?php echo base_url(); ?>logout">Logout</a>
                         </div>
                     </div>
                 </div>

@@ -33,6 +33,7 @@
       <th>Tanggal Mulai</th>
       <th>Tanggal Selesai</th>
       <th>Deskripsi Singkat</th>
+      <th>File Surat</th>
       <th>Status</th>
       <th>Aksi</th>
     </tr>
@@ -50,6 +51,9 @@
         <td><?=$data['tanggal_mulai']?></td>
         <td><?=$data['tanggal_selesai']?></td>
         <td><?=$data['deskripsi']?></td>
+        <td>
+          <a class="btn btn-info" href="<?php echo base_url() ?>file_surat/<?php echo @$data['file']; ?>"><i class="fa fa-cloud-download"></i></a>
+        </td>
         <td><?=(@$data['status']=='proses') ? "<label class='text-warning'>PROSES</label>": "<label class='text-success'>SELESAI</label>";?></td>
         <td nowrap="">
           <form action="<?php echo base_url() ?>agenda/delete_agenda" method="POST">
