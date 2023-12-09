@@ -52,6 +52,12 @@ class sppd extends CI_Controller {
 		$data['halaman'] = 'master/set_pelapoan';
 		$this->load->view('home',$data);
 	}
+	public function pencairan()
+	{
+		$this->cek_login();
+		$data['halaman'] = 'master/pencairan';
+		$this->load->view('home',$data);
+	}
 	public function save_deskripsi_pelapoan(){
 		$this->cek_login();
 		$data = array(
