@@ -22,7 +22,7 @@
             <div class="triangle"></div>
         </li>
         <div class="triangle"></div>
-           <li class="nav-item <?php echo (in_array($uri,array('pencairan'))) ? "active" : ""; ?>"><a class="nav-item-hold" href="<?php echo base_url(); ?>sppd/pencairan"><i class="nav-icon fa fa-dollar"></i><span class="nav-text">Pencairan</span></a>
+           <li class="nav-item <?php echo (in_array($uri,array('pencairan'))) ? "active" : ""; ?>"><a class="nav-item-hold" href="<?php echo base_url(); ?>sppd/pencairan"><i class="nav-icon fa fa-folder-open"></i><span class="nav-text">Pencairan</span></a>
             <div class="triangle"></div>
         </li>
         <div class="triangle"></div>
