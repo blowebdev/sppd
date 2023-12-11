@@ -11,7 +11,7 @@
  Target Server Version : 100427
  File Encoding         : 65001
 
- Date: 07/12/2023 15:56:23
+ Date: 11/12/2023 19:00:02
 */
 
 SET NAMES utf8mb4;
@@ -68,6 +68,28 @@ CREATE TABLE `m_pegawai`  (
 -- ----------------------------
 INSERT INTO `m_pegawai` VALUES (160, '198610082019012001', 'Hilmi', 'Pangkat', 'Golongan', '081330743342', 'Alamat', 'Jabatan', '2023-12-04', 'Jombang', '', 'user', '202cb962ac59075b964b07152d234b70', 'L');
 INSERT INTO `m_pegawai` VALUES (161, '198610082019012001', 'Hidayaturrobi', 'Pangkat', 'asasaa', '081330743342', 'Jalan Pacar, Ketabang 60272, Indonesia', 'Jabatan', '2023-12-05', 'Jombang', '', 'user1', '202cb962ac59075b964b07152d234b70', 'P');
+
+-- ----------------------------
+-- Table structure for m_pencairan
+-- ----------------------------
+DROP TABLE IF EXISTS `m_pencairan`;
+CREATE TABLE `m_pencairan`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_agenda` int NULL DEFAULT NULL,
+  `berangkat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `lokasi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `jarak` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `dana` int NULL DEFAULT NULL,
+  `lat_long1` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `lat_long2` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `id`(`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of m_pencairan
+-- ----------------------------
+INSERT INTO `m_pencairan` VALUES (2, 1, 'SMPN 11 Cirebon, Karyamulya, Kota Cirebon, Jawa Barat, Indonesia', 'SMPN 29 BANDUNG, Jalan Geger Arum, Isola, Kota Bandung, Jawa Barat, Indonesia', '158 ', 632000, '-6.746659500000001,108.5285396', '-6.8608011,107.5863855');
 
 -- ----------------------------
 -- Table structure for m_penugasan
