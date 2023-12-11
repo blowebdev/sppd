@@ -46,9 +46,6 @@
         </td>
         <td><?=(@$data['status']=='proses') ? "<label class='text-warning'>PROSES</label>": "<label class='text-success'>SELESAI</label>";?></td>
         <td nowrap="">
-          <?php  if(in_array($_SESSION['level'],array('1'))) : ?>
-            <a href="<?php echo base_url() ?>sppd/set_penugasan?id=<?php echo $data['id'] ?>" class="btn btn-info"><i class="fa fa-users"></i> Set Penugasan</a>
-          <?php endif; ?>
           <?php if($totPenugasan>=1) :  ?>
               <a href="<?php echo base_url() ?>sppd/pelaporan?id=<?php echo $data['id'] ?>" class="btn btn-warning"><i class="fa fa-file-text" aria-hidden="true"></i> Pelaporan</a>
              <?php  if(in_array($_SESSION['level'],array('2'))) : ?>

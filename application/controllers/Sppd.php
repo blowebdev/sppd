@@ -58,6 +58,70 @@ class sppd extends CI_Controller {
 		$data['halaman'] = 'master/pencairan';
 		$this->load->view('home',$data);
 	}
+	public function act_pencairan()
+	{
+		$this->cek_login();
+		$data['halaman'] = 'master/act_pencairan';
+		$this->load->view('home',$data);
+	}
+	public function cetak_kwitansi()
+	{
+		$this->cek_login();
+		$data['halaman'] = 'master/cetak_kwitansi';
+		$this->load->view('master/cetak_kwitansi',$data);
+	}
+
+	public function save_pencairan(){
+		$this->cek_login();
+
+		$json_url = "https://maps.googleapis.com/maps/api/directions/json?origin=".$_REQUEST['lat'].",".$_REQUEST['long']."&destination=".$_REQUEST['lat2'].",".$_REQUEST['long2']."&key=AIzaSyBTgPmRwGjuwyazUzzZl6CosQTw1qpUDtY&mode=motorcycle";
+        $json = file_get_contents($json_url);
+        $data = json_decode($json, TRUE);
+        $jarak_motor = $data['routes'][0]['legs'][0]['distance']['text'];
+        $estimasi_waktu_motor = $data['routes'][0]['legs'][0]['duration']['text'];
+        $jarak_fix = str_replace('km','', $jarak_motor);
+        $total_dana = $jarak_fix * 4000;
+
+		$data = array(
+			'id_agenda'=>$_REQUEST['id_agenda'],
+			'lokasi'=>$_REQUEST['lokasi_tujuan'],
+			'berangkat'=>$_REQUEST['berangkat_dari'],
+			'dana'=>$total_dana,
+			'jarak'=>$jarak_fix,
+			'lat_long1'=>$_REQUEST['lat'].",".$_REQUEST['long'],
+			'lat_long2'=>$_REQUEST['lat2'].",".$_REQUEST['long2'],
+		);
+
+		$tot = $this->db->get_where('m_pencairan',array('id_agenda'=>$_REQUEST['id_agenda']))->num_rows();
+		if ($tot>=1) {
+			$this->db->where(array('id_agenda'=>$_REQUEST['id_agenda']));
+			$exc = $this->db->update('m_pencairan',$data);
+		}else{
+			$exc = $this->db->insert('m_pencairan',$data);
+		}
+		if ($exc) {
+			$alert['alert'] = '
+			<div class="alert alert-success alert-dismissible" role="alert">
+			<div class="alert-message">
+			<strong>Perhatian !! Data berhasil disimpan</strong>
+			</div>
+			</div>
+			';
+			$this->session->set_flashdata('alert',$alert);
+			redirect('sppd/act_pencairan?id_agenda='.$_REQUEST['id_agenda'],'refresh');
+			
+		}else{
+			$alert['alert'] = '
+			<div class="alert alert-danger alert-dismissible" role="alert">
+			<div class="alert-message">
+			<strong>Perhatian !! Data gagal disimpan</strong>
+			</div>
+			</div>
+			';
+			$this->session->set_flashdata('alert',$alert);
+			redirect('sppd/act_pencairan?id_agenda='.$_REQUEST['id_agenda'],'refresh');
+		}
+	}
 	public function save_deskripsi_pelapoan(){
 		$this->cek_login();
 		$data = array(

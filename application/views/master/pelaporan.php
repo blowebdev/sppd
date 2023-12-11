@@ -28,6 +28,16 @@
                   <td>Tempat </td>
                   <td> : <?php echo $showTanggal['tempat']; ?></td>
                 </tr>
+                 <tr>
+                  <td>Verifikasi </td>
+                  <td nowrap="">
+                    <form action="" method="POST">
+                      <input type="hidden" value="<?php echo @$_REQUEST['id']; ?>" name="id">
+                      <button type="submit" class="btn btn-success" onclick="return confirm('Apakah anda yakin ?');" name="btn">Selesai</button>
+                      <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ?');" name="btn">Tolak</button>
+                    </form>
+                  </td>
+                </tr>
               </table>
             </td>
           </tr>

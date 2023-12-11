@@ -11,8 +11,6 @@
     <link rel="icon" href="../monev2018/logosby.png">
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet" />
     <link href="<?php echo base_url(); ?>assets/css/themes/lite-purple.min.css" rel="stylesheet" />
-    <link href="<?php echo base_url(); ?>assets/css/plugins/perfect-scrollbar.min.css" rel="stylesheet" />
-    <link href="<?php echo base_url(); ?>js/css/plugins/perfect-scrollbar.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/fixedcolumns/4.0.1/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
@@ -30,7 +28,9 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
 
-    <link href="<?php echo base_url(); ?>assets/css/plugins/perfect-scrollbar.min.css" rel="stylesheet" />
+    <script type="text/javascript">
+        
+    </script>
     <style type="text/css">
         .badge2 {
             display: inline-block;
@@ -167,6 +167,8 @@
                         
         <script>
             $(document).ready(function() {
+
+
                 $('#pd').select2();
                 $('#pd2').select2();
                 $('#tw').select2();
