@@ -11,7 +11,7 @@
  Target Server Version : 100427
  File Encoding         : 65001
 
- Date: 15/12/2023 09:48:13
+ Date: 15/12/2023 17:07:45
 */
 
 SET NAMES utf8mb4;
@@ -110,7 +110,7 @@ CREATE TABLE `m_penugasan`  (
 -- ----------------------------
 -- Records of m_penugasan
 -- ----------------------------
-INSERT INTO `m_penugasan` VALUES (7, '160', 1, NULL);
+INSERT INTO `m_penugasan` VALUES (7, '160', 1, '               Deskripsi Hasil Pertemuan :              ');
 INSERT INTO `m_penugasan` VALUES (8, '161', 1, NULL);
 
 -- ----------------------------
@@ -144,7 +144,7 @@ CREATE TABLE `m_users`  (
   `nama` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `username` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `password` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `level` enum('1','2') CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '1'
+  `level` enum('1','2','3') CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '1'
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -152,5 +152,6 @@ CREATE TABLE `m_users`  (
 -- ----------------------------
 INSERT INTO `m_users` VALUES (4, 'Admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', '1');
 INSERT INTO `m_users` VALUES (2, 'Operator', 'operator', '202cb962ac59075b964b07152d234b70', '2');
+INSERT INTO `m_users` VALUES (3, 'bendahara', 'bendahara', '202cb962ac59075b964b07152d234b70', '3');
 
 SET FOREIGN_KEY_CHECKS = 1;
