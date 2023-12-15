@@ -13,6 +13,10 @@
             <div class="triangle"></div>
         </li>
         <div class="triangle"></div>
+        <li class="nav-item <?php echo (in_array($uri,array('surat_masuk','act_surat_masuk'))) ? "active" : ""; ?>"><a class="nav-item-hold" href="<?php echo base_url(); ?>master/surat_masuk"><i class="nav-icon    fa fa-download"></i><span class="nav-text">Surat Masuk</span></a>
+            <div class="triangle"></div>
+        </li>
+        <div class="triangle"></div>
            <li class="nav-item <?php echo (in_array($uri,array('agenda','act_agenda')))? "active" : ""; ?>"><a class="nav-item-hold" href="<?php echo base_url(); ?>agenda/agenda"><i class="nav-icon fa fa-calendar"></i><span class="nav-text">Agenda</span></a>
             <div class="triangle"></div>
         </li>

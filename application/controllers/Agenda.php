@@ -46,18 +46,18 @@ class agenda extends CI_Controller {
 		$config['max_height']           = 10000;
 		$this->load->library('upload', $config);
 
-		if($_FILES['file']['name']!="") {
-			if (!$this->upload->do_upload('file')){
-				echo $this->upload->display_errors();
-			}else{
-				$upload_data=$this->upload->data();
-				$file=(empty($upload_data['file_name'])) ? "-" : $upload_data['file_name'];
-			}
-		}else{
-			$file = $_REQUEST['file_lama'];
-		}
+		// if($_FILES['file']['name']!="") {
+		// 	if (!$this->upload->do_upload('file')){
+		// 		echo $this->upload->display_errors();
+		// 	}else{
+		// 		$upload_data=$this->upload->data();
+		// 		$file=(empty($upload_data['file_name'])) ? "-" : $upload_data['file_name'];
+		// 	}
+		// }else{
+		// 	$file = $_REQUEST['file_lama'];
+		// }
 
-		$set_file = (!empty($file)) ? $file : 'NULL';
+		// $set_file = (!empty($file)) ? $file : 'NULL';
 
 		$data = array(
 			'agenda' => $_REQUEST['agenda'],
@@ -68,7 +68,8 @@ class agenda extends CI_Controller {
 			'deskripsi' => $_REQUEST['deskripsi'],
 			'tanggal_surat' => $_REQUEST['tanggal_surat'],
 			'perihal' => $_REQUEST['perihal'],
-			'file' => $set_file,
+			'id_surat' => $_REQUEST['id_surat'],
+			// 'file' => $set_file,
 			'status' => 'proses',
 		);
 

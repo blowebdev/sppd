@@ -41,39 +41,76 @@ if(isset($_SESSION['alert'])){
           </div>
         </div>
         <div class="form-group">
+          <label for="inputtext3" class="col-sm-2 control-label">Pilih Surat Masuk</label>
+          <div class="col-sm-10">
+            <select class="form-control" name="id_surat" id="id_surat" onchange="get_surat();">
+              <option value="">Pilih Surat Masuk</option>
+              <?php 
+                $surat = $this->db->get_where("m_surat_masuk")->result_array();
+                foreach ($surat as $key => $data):
+              ?>
+                <option value="<?php echo $data['id'] ?>" <?php echo ($data['id']==@$rows['id_surat']) ? "selected": ""; ?>><?php echo $data['nama_surat'] ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+        </div>
+        <script type="text/javascript">
+          function get_surat() {
+            var id_surat = $("#id_surat").val();
+            $.ajax({
+                url: '<?php echo base_url() ?>/master/surat_list?id='+id_surat,
+                type: 'post',
+                dataType: "json",
+                success: function (data) {
+                  if (!data) {
+                    $("#nomor_surat").val("");
+                    $("#tanggal_surat").val("");
+                    $("#perihal").val("");
+                    $("#tempat").val("");
+                    $("#file_surat").html('<input type="" class="form-control" readonly name="">');
+                  }else{
+                    $("#nomor_surat").val(data['no_surat']);
+                    $("#tanggal_surat").val(data['tgl_surat']);
+                    $("#perihal").val(data['perihal']);
+                    $("#tempat").val(data['tempat']);
+                    $("#file_surat").html("<a href='<?php echo base_url() ?>file_surat/"+data['file_surat']+"'>"+data['file_surat']+"</a>");
+                  }
+                }
+              });
+          }
+        </script>
+        <div class="form-group">
           <label for="inputtext3" class="col-sm-2 control-label">Nomor Surat</label>
           <div class="col-sm-10">
-            <input type="text" name="nomor_surat" value="<?php echo @$rows['nomor_surat']; ?>" class="form-control" required>
+            <input type="text" name="nomor_surat" id="nomor_surat" readonly value="<?php echo @$rows['nomor_surat']; ?>" class="form-control" required>
           </div>
         </div>
          <div class="form-group">
           <label for="inputtext3" class="col-sm-2 control-label">Tanggal Surat</label>
           <div class="col-sm-10">
-            <input type="date" name="tanggal_surat" value="<?php echo @$rows['tanggal_surat']; ?>" class="form-control" required>
+            <input type="date" name="tanggal_surat" id="tanggal_surat" readonly value="<?php echo @$rows['tanggal_surat']; ?>" class="form-control" required>
           </div>
         </div>
         <div class="form-group">
           <label for="inputtext3" class="col-sm-2 control-label">Perihal Surat</label>
           <div class="col-sm-10">
-            <input type="text" name="perihal" value="<?php echo @$rows['perihal']; ?>" class="form-control" required>
+            <input type="text" name="perihal" id="perihal" readonly value="<?php echo @$rows['perihal']; ?>" class="form-control" required>
           </div>
         </div>
         <div class="form-group">
-          <label for="inputtext3" class="col-sm-2 control-label">Upload File Surat</label>
-          <div class="col-sm-10">
-            <?php if(!empty($_REQUEST['id'])) : ?>
-            <input type="file" name="file" class="form-control">
-            <input type="hidden" value="<?php echo @$rows['file']; ?>" name="file_lama" class="form-control">
-            <a href="<?php echo base_url() ?>file_surat/<?php echo @$rows['file']; ?>"><?php echo @$rows['file']; ?></a>
-            <?php else : ?>
-            <input type="file" name="file" class="form-control" required>
-            <?php endif;  ?>
+          <label for="inputtext3" class="col-sm-2 control-label">File Surat</label>
+          <div class="col-sm-10" id="file_surat">
+              <?php if(!empty($_REQUEST['id'])) :  ?>
+              <a href='<?php echo base_url() ?>file_surat/<?php echo $data['file_surat']; ?>'><?php echo $data['file_surat']; ?></a>
+              <?php else : ?>
+              <input type="" class="form-control" readonly name="">
+            <?php endif; ?>
           </div>
         </div>
         <div class="form-group">
           <label for="inputtext3" class="col-sm-2 control-label">Tempat</label>
           <div class="col-sm-10">
-            <input type="text" name="tempat" value="<?php echo @$rows['tempat']; ?>" class="form-control" required>
+            <input type="text" name="tempat" value="<?php echo @$rows['tempat']; ?>" id="tempat" class="form-control" required>
           </div>
         </div>
         <div class="form-group">

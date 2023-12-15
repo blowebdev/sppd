@@ -50,9 +50,9 @@
         <td><?=$data['tempat']?></td>
         <td><?=$data['tanggal_mulai']?></td>
         <td><?=$data['tanggal_selesai']?></td>
-        <td><?=$rows['jarak']?></td>
+        <td><?=@$rows['jarak']?></td>
         <td>Rp. 4000/ 1 KM</td>
-        <td><?=number_format($rows['dana'])?></td>
+        <td><?=number_format(@$rows['dana'])?></td>
         <td nowrap="">
            <button type="button" class="btn bg-transparent _r_btn border-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="_dot _r_block-dot bg-dark"></span>
