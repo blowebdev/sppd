@@ -28,7 +28,7 @@
                   <td>Tempat </td>
                   <td> : <?php echo $showTanggal['tempat']; ?></td>
                 </tr>
-                 <tr>
+                <!--  <tr>
                   <td>Verifikasi </td>
                   <td nowrap="">
                     <form action="" method="POST">
@@ -37,7 +37,7 @@
                       <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ?');" name="btn">Tolak</button>
                     </form>
                   </td>
-                </tr>
+                </tr> -->
               </table>
             </td>
           </tr>
@@ -64,12 +64,21 @@
     <tbody>
       <?php 
       $no=1;
+      if($_SESSION['level']==4){
+         $q = $this->db->query("
+          SELECT a.*, b.*, c.*, a.id as id_uniq, a.deskripsi_laporan FROM m_penugasan as a 
+            LEFT JOIN m_pegawai as b ON a.id_pegawai = b.id
+            LEFT JOIN m_agenda as c ON a.id_agenda = c.id
+            WHERE b.id='".$_SESSION['data']['id']."' 
+        ")->result_array();;
+      }else{
       $q = $this->db->query("
         SELECT a.*, b.*, c.*, a.id as id_uniq, a.deskripsi_laporan FROM m_penugasan as a 
         LEFT JOIN m_pegawai as b ON a.id_pegawai = b.id
         LEFT JOIN m_agenda as c ON a.id_agenda = c.id
         WHERE a.id_agenda='".$_REQUEST['id']."'
         ")->result_array();
+      }
       foreach ($q as $key => $data) :
 
         ?>

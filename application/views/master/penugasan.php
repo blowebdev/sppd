@@ -30,7 +30,16 @@
   <tbody>
     <?php 
     $no=1;
+    if($_SESSION['level']==4){
+    $q = $this->db->query("
+      SELECT a.*, b.*, c.*, a.id as id_uniq, a.deskripsi_laporan FROM m_penugasan as a 
+        LEFT JOIN m_pegawai as b ON a.id_pegawai = b.id
+        LEFT JOIN m_agenda as c ON a.id_agenda = c.id
+        WHERE b.id='".$_SESSION['data']['id']."' 
+    ")->result_array();;
+    }else{
     $q = $this->db->get_where("m_agenda")->result_array();
+    }
     foreach ($q as $key => $data) :
       $totPenugasan = $this->db->get_where("m_penugasan",array('id_agenda'=>$data['id']))->num_rows();
       ?>
