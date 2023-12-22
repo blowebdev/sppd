@@ -42,6 +42,7 @@
     }
     foreach ($q as $key => $data) :
       $totPenugasan = $this->db->get_where("m_penugasan",array('id_agenda'=>$data['id']))->num_rows();
+      $rows = $this->db->get_where("m_surat_masuk",array('id'=>@$data['id_surat']))->row_array();
       ?>
       <tr>
         <td><?=$no++?></td>
@@ -51,13 +52,14 @@
         <td><?=$data['tanggal_selesai']?></td>
         <td><?php echo $totPenugasan; ?> Pegawai</td>
         <td>
-          <a class="btn btn-info" href="<?php echo base_url() ?>file_surat/<?php echo @$data['file']; ?>"><i class="fa fa-cloud-download"></i></a>
+          <a class="btn btn-info" href="<?php echo base_url() ?>file_surat/<?php echo @$rows['file_surat']; ?>"><i class="fa fa-cloud-download"></i></a>
         </td>
         <td><?=(@$data['status']=='proses') ? "<label class='text-warning'>PROSES</label>": "<label class='text-success'>SELESAI</label>";?></td>
         <td nowrap="">
           <?php  if(in_array($_SESSION['level'],array('1'))) : ?>
             <a href="<?php echo base_url() ?>sppd/set_penugasan?id=<?php echo $data['id'] ?>" class="btn btn-info"><i class="fa fa-users"></i> Set Penugasan</a>
           <?php endif; ?>
+
           <?php if($totPenugasan>=1) :  ?>
               <a href="<?php echo base_url() ?>sppd/pelaporan?id=<?php echo $data['id'] ?>" class="btn btn-warning"><i class="fa fa-file-text" aria-hidden="true"></i> Pelaporan</a>
              <?php  if(in_array($_SESSION['level'],array('2'))) : ?>

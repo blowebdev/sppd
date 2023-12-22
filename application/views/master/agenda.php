@@ -33,7 +33,8 @@
       <th>Tanggal Mulai</th>
       <th>Tanggal Selesai</th>
       <th>Deskripsi Singkat</th>
-      <th>File Surat</th>
+      <th>File Surat Masuk</th>
+      <th>File Surat SPPD</th>
       <th>Status</th>
       <th>Aksi</th>
     </tr>
@@ -44,6 +45,7 @@
     $q = $this->db->get("m_agenda")->result_array();
     foreach ($q as $key => $data) :
       $rows = $this->db->get_where("m_surat_masuk",array('id'=>@$data['id_surat']))->row_array();
+      $totPenugasan = $this->db->get_where("m_penugasan",array('id_agenda'=>$data['id']))->num_rows();
       ?>
       <tr>
         <td><?=$no++?></td>
@@ -54,6 +56,11 @@
         <td><?=$data['deskripsi']?></td>
         <td>
           <a class="btn btn-info" href="<?php echo base_url() ?>file_surat/<?php echo @$rows['file_surat']; ?>"><i class="fa fa-cloud-download"></i></a>
+        </td>
+        <td>
+           <?php if($totPenugasan>=1) :  ?>
+             <a href="<?php echo base_url() ?>sppd/cetak_sppd?id=<?php echo $data['id'] ?>" class="btn btn-danger"><i class="fa fa-cloud-download"></i></a>
+           <?php endif; ?>
         </td>
         <td><?=(@$data['status']=='proses') ? "<label class='text-warning'>PROSES</label>": "<label class='text-success'>SELESAI</label>";?></td>
         <td nowrap="">

@@ -87,7 +87,11 @@
           <td><?=$data['nama']?></td>
           <td><?=$data['deskripsi_laporan']?></td>
           <td nowrap="">
-              <a href="<?php echo base_url() ?>sppd/set_pelapoan?id_agenda=<?php echo $data['id_agenda']; ?>&id_pegawai=<?php echo $data['id_pegawai']; ?>" class="btn btn-info"><i class="fa fa-folder-open"></i> Isi Laporan</a>
+               <?php  if(in_array($_SESSION['level'],array('4'))) : ?>
+                <a href="<?php echo base_url() ?>sppd/set_pelapoan?id_agenda=<?php echo $data['id_agenda']; ?>&id_pegawai=<?php echo $data['id_pegawai']; ?>" class="btn btn-info"><i class="fa fa-folder-open"></i> Isi Laporan</a>
+              <?php else : ?>
+                <i>Hak Akses Pegawai</i>
+               <?php endif; ?>
           </td>
         </tr>
       <?php endforeach; ?>

@@ -23,7 +23,7 @@
             <div class="triangle"></div>
         </li>
          <?php endif; ?>
-        <?php  if(in_array($_SESSION['level'],array('1','4'))) : ?>
+        <?php  if(in_array($_SESSION['level'],array('1','4','2'))) : ?>
         <div class="triangle"></div>
            <li class="nav-item <?php echo (in_array($uri,array('penugasan','pelaporan','set_pelapoan','set_penugasan'))) ? "active" : ""; ?>"><a class="nav-item-hold" href="<?php echo base_url(); ?>sppd/penugasan"><i class="nav-icon fa fa-clipboard"></i><span class="nav-text">SPPD</span></a>
             <div class="triangle"></div>
@@ -36,7 +36,7 @@
         </li>
          <?php endif; ?>
         <div class="triangle"></div>
-           <li class="nav-item <?php echo (in_array($uri,array('report'))) ? "active" : ""; ?>"><a class="nav-item-hold" href="<?php echo base_url(); ?>sppd/report"><i class="nav-icon fa fa-bar-chart"></i><span class="nav-text">Report</span></a>
+           <li class="nav-item <?php echo (in_array($uri,array('report','act_pencairan'))) ? "active" : ""; ?>"><a class="nav-item-hold" href="<?php echo base_url(); ?>sppd/report"><i class="nav-icon fa fa-bar-chart"></i><span class="nav-text">Riwayat</span></a>
             <div class="triangle"></div>
         </li>
         <div class="triangle"></div>

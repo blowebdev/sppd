@@ -7,18 +7,10 @@
         <li>Tambah pencairan yang ada di sistem</li>
       </ul>
     </div>
-
+    <?php 
+      $uri = $this->uri->segment(2);
+    ?>
     <div class="separator-breadcrumb border-top"></div>
-    <div class="row">
-      <div class="col-lg-12 col-sm-12">
-        <div class="card">
-          <div class="card-body">
-            <a href="<?php echo base_url() ?>sppd/pencairan" class="btn btn-danger">Kembali</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <br>
     <?php 
     $rows = $this->db->get_where("m_pencairan",array('id_agenda'=>@$_REQUEST['id_agenda']))->row_array();
     $berangkat_dari  = @$rows['berangkat'];

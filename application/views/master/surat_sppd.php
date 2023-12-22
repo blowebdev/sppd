@@ -149,14 +149,15 @@
 		<tr>
 			<td width="7%"></td>
 			<td width="40%"><center></center></td>
-			<td width="40%" style="text-align: center;"><center>Mojowarto 7 November 2023 <br>Kepala Sekolah,</center></td>
+			<td width="40%" style="text-align: center;"><center>Mojowarno, 7 November 2023 <br>Kepala Sekolah,</center></td>
 		</tr>
 		
 			<tr>
 				<td></td>
 				<td style="height: 50px"></td>
-				<td><br>
-				<br><br></td>
+				<td style="text-align: center;"><br><br>
+					<img style="width: 60px; width: 60px;" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Dra. LISTYOWATI, M.Pd. / Pembina Tk. 1 / NIP. 19660304 199003 2006&type=lampiran&cetak=true"> <br>
+				</td>
 			</tr>
 
 		
