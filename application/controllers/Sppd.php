@@ -43,6 +43,37 @@ class sppd extends CI_Controller {
 	public function pelaporan()
 	{
 		$this->cek_login();
+
+		if (isset($_REQUEST['simpan_verifikasi'])) {
+			$data = array(
+				'status_laporan' => $_REQUEST['status'],
+				'catatan_laporan' => $_REQUEST['catatan']
+			);
+			$exc = $this->db->where(array('id'=>$_REQUEST['id_uniq']))->update('m_penugasan',$data);
+			if ($exc) {
+				$alert['alert'] = '
+				<div class="alert alert-success alert-dismissible" role="alert">
+				<div class="alert-message">
+				<strong>Perhatian !! Data berhasil disimpan</strong>
+				</div>
+				</div>
+				';
+				$this->session->set_flashdata('alert',$alert);
+				redirect('sppd/pelaporan?id='.$_REQUEST['id'],'refresh');
+			}else{
+				$alert['alert'] = '
+				<div class="alert alert-danger alert-dismissible" role="alert">
+				<div class="alert-message">
+				<strong>Perhatian !! Data gagal disimpan</strong>
+				</div>
+				</div>
+				';
+				$this->session->set_flashdata('alert',$alert);
+				redirect('sppd/pelaporan?id='.$_REQUEST['id'],'refresh');
+			}
+		}
+
+
 		$data['halaman'] = 'master/pelaporan';
 		$this->load->view('home',$data);
 	}
@@ -75,12 +106,12 @@ class sppd extends CI_Controller {
 		$this->cek_login();
 
 		$json_url = "https://maps.googleapis.com/maps/api/directions/json?origin=".$_REQUEST['lat'].",".$_REQUEST['long']."&destination=".$_REQUEST['lat2'].",".$_REQUEST['long2']."&key=AIzaSyBTgPmRwGjuwyazUzzZl6CosQTw1qpUDtY&mode=motorcycle";
-        $json = file_get_contents($json_url);
-        $data = json_decode($json, TRUE);
-        $jarak_motor = $data['routes'][0]['legs'][0]['distance']['text'];
-        $estimasi_waktu_motor = $data['routes'][0]['legs'][0]['duration']['text'];
-        $jarak_fix = str_replace('km','', $jarak_motor);
-        $total_dana = $jarak_fix * 4000;
+		$json = file_get_contents($json_url);
+		$data = json_decode($json, TRUE);
+		$jarak_motor = $data['routes'][0]['legs'][0]['distance']['text'];
+		$estimasi_waktu_motor = $data['routes'][0]['legs'][0]['duration']['text'];
+		$jarak_fix = str_replace('km','', $jarak_motor);
+		$total_dana = $jarak_fix * 4000;
 
 		$data = array(
 			'id_agenda'=>$_REQUEST['id_agenda'],

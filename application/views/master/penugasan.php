@@ -61,7 +61,7 @@
           <?php endif; ?>
 
           <?php if($totPenugasan>=1) :  ?>
-              <a href="<?php echo base_url() ?>sppd/pelaporan?id=<?php echo $data['id'] ?>" class="btn btn-warning"><i class="fa fa-file-text" aria-hidden="true"></i> Pelaporan</a>
+              <a href="<?php echo base_url() ?>sppd/pelaporan?id=<?php echo $data['id'] ?>" class="btn btn-success"><i class="fa fa-folder-open"></i> Pelaporan</a>
              <?php  if(in_array($_SESSION['level'],array('2'))) : ?>
              <a href="<?php echo base_url() ?>sppd/cetak_sppd?id=<?php echo $data['id'] ?>" class="btn btn-danger"><i class="fa fa-print"></i> Cetak SPPD</a>
              <?php endif; ?>

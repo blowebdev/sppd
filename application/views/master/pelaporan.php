@@ -58,6 +58,7 @@
         <th width="1%">NIP</th>
         <th width="3%">Nama</th>
         <th>Deskripsi Laporan</th>
+        <th>Status</th>
         <th>Aksi</th>
       </tr>
     </thead>
@@ -85,15 +86,47 @@
         <tr>
           <td><?=$data['nip']?></td>
           <td><?=$data['nama']?></td>
-          <td><?=$data['deskripsi_laporan']?></td>
+          <td><?=$data['deskripsi_laporan']?></td>  
+          <td><?=($data['status_laporan']=='setuju') ? "<label class='text-success'>".$data['status_laporan']."</label>" : "<label class='text-danger'>".$data['status_laporan']."</label>"?></td>
           <td nowrap="">
                <?php  if(in_array($_SESSION['level'],array('4'))) : ?>
                 <a href="<?php echo base_url() ?>sppd/set_pelapoan?id_agenda=<?php echo $data['id_agenda']; ?>&id_pegawai=<?php echo $data['id_pegawai']; ?>" class="btn btn-info"><i class="fa fa-folder-open"></i> Isi Laporan</a>
+               <?php elseif(in_array($_SESSION['level'],array('1'))) : ?>
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#verifikasi<?php echo $data['id_uniq']; ?>"><i class="fa fa-folder-open"></i> Verifikasi</button>
               <?php else : ?>
                 <i>Hak Akses Pegawai</i>
                <?php endif; ?>
           </td>
         </tr>
+
+        <div id="verifikasi<?php echo $data['id_uniq']; ?>" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Verifikasi laporan atas nama [<b><?=$data['nama']; ?></b>]</h4>
+              </div>
+              <div class="modal-body">
+                <form action="" method="POST">
+                  <input type="hidden" name="id_uniq" value="<?php echo $data['id_uniq']; ?>">
+                  <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
+                  <label>Verifikasi</label>
+                  <select class="form-control" name="status" required="">
+                    <option value="setuju" <?=($data['status_laporan']=='setuju') ? "selected" : "";?>>Setuju</option>
+                    <option value="tolak"  <?=($data['status_laporan']=='tolak') ? "selected" : "";?>>Tolak</option>
+                  </select>
+                  <label>Catatan</label>
+                  <textarea class="form-control" name="catatan" rows="10" cols="10" style="width: 47vh !important; height: 20vh;"><?=$data['status_laporan'];?></textarea>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" name="simpan_verifikasi" class="btn btn-primary">Simpan</button>
+              </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       <?php endforeach; ?>
     </tbody>
   </table>

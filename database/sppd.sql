@@ -11,7 +11,7 @@
  Target Server Version : 100427
  File Encoding         : 65001
 
- Date: 15/12/2023 17:07:45
+ Date: 05/01/2024 08:27:14
 */
 
 SET NAMES utf8mb4;
@@ -103,15 +103,18 @@ CREATE TABLE `m_penugasan`  (
   `id_pegawai` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `id_agenda` int NULL DEFAULT NULL,
   `deskripsi_laporan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `status_laporan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `catatan_laporan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `id`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of m_penugasan
 -- ----------------------------
-INSERT INTO `m_penugasan` VALUES (7, '160', 1, '               Deskripsi Hasil Pertemuan :              ');
-INSERT INTO `m_penugasan` VALUES (8, '161', 1, NULL);
+INSERT INTO `m_penugasan` VALUES (7, '160', 1, '               Deskripsi Hasil Pertemuan :              ', 'setuju', 'setuju');
+INSERT INTO `m_penugasan` VALUES (8, '161', 1, NULL, 'setuju', '');
+INSERT INTO `m_penugasan` VALUES (9, '160', 3, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for m_surat_masuk
