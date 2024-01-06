@@ -73,6 +73,35 @@ class sppd extends CI_Controller {
 			}
 		}
 
+		if (isset($_REQUEST['simpan_verifikasi_agenda'])) {
+			$data = array(
+				'status' => $_REQUEST['status'],
+				'catatan' => $_REQUEST['catatan']
+			);
+			$exc = $this->db->where(array('id'=>$_REQUEST['id']))->update('m_agenda',$data);
+			if ($exc) {
+				$alert['alert'] = '
+				<div class="alert alert-success alert-dismissible" role="alert">
+				<div class="alert-message">
+				<strong>Perhatian !! Data berhasil disimpan</strong>
+				</div>
+				</div>
+				';
+				$this->session->set_flashdata('alert',$alert);
+				redirect('sppd/pelaporan?id='.$_REQUEST['id'],'refresh');
+			}else{
+				$alert['alert'] = '
+				<div class="alert alert-danger alert-dismissible" role="alert">
+				<div class="alert-message">
+				<strong>Perhatian !! Data gagal disimpan</strong>
+				</div>
+				</div>
+				';
+				$this->session->set_flashdata('alert',$alert);
+				redirect('sppd/pelaporan?id='.$_REQUEST['id'],'refresh');
+			}
+		}
+
 
 		$data['halaman'] = 'master/pelaporan';
 		$this->load->view('home',$data);
