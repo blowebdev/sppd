@@ -238,11 +238,41 @@ class sppd extends CI_Controller {
         // Add a page
 		$pdf->AddPage();
 		$html =$this->load->view('master/surat_sppd', [], true);
+
         // Set some content
 		$pdf->writeHTML($html, true, false, true, false, '');
 		$pdf->lastPage();
         // Output the PDF as a file (force download)
 		$pdf->Output('Proposal.pdf', 'I');
+
+	}
+
+	public function cetak_lampiran_sppd()
+	{
+		$this->cek_login();
+		 // Create new PDF document
+		$pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
+
+        // Set document information
+		$pdf->SetCreator(PDF_CREATOR);
+		$pdf->SetAuthor('Your Name');
+		$pdf->SetTitle('Sample PDF');
+		$pdf->SetSubject('Generating PDF using TCPDF in CodeIgniter');
+		$pdf->SetKeywords('PDF, CodeIgniter, TCPDF');
+
+		// remove default header/footer
+		$pdf->setPrintHeader(false);
+		$pdf->setPrintFooter(false);
+        // Add a page
+		$pdf->AddPage();
+		$html =$this->load->view('master/lampiran_surat_sppd', [], true);
+
+        // Set some content
+		$pdf->writeHTML($html, true, false, true, false, '');
+		$pdf->lastPage();
+        // Output the PDF as a file (force download)
+		$pdf->Output('Proposal.pdf', 'I');
+
 	}
 
 	public function save_set_penugasan(){

@@ -45,6 +45,7 @@
         <td>Rp. 4000/ 1 KM</td>
         <td><?=number_format(@$rows['dana'])?></td>
         <td nowrap="">
+          <?php  if(!in_array($_SESSION['level'],array('4'))) : ?>
            <button type="button" class="btn bg-transparent _r_btn border-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="_dot _r_block-dot bg-dark"></span>
                 <span class="_dot _r_block-dot bg-dark"></span>
@@ -54,6 +55,9 @@
                 <a class="dropdown-item" href="<?php echo base_url() ?>sppd/act_pencairan?id_agenda=<?php echo $data['id']; ?>"><i class="nav-icon i-Pen-2 text-success font-weight-bold mr-2"></i>Edit Contact</a>
                 <a class="dropdown-item" href="<?php echo base_url() ?>sppd/cetak_kwitansi?id_agenda=<?php echo $data['id']; ?>"><i class="nav-icon fa fa-dollar text-danger font-weight-bold mr-2"></i>Cetak Kwitansi</a>                      
             </div>
+          <?php else : ?>
+            Hak akses operator
+          <?php endif; ?>
         </td>
       </tr> 
     <?php endforeach; ?>

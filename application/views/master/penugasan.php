@@ -56,10 +56,11 @@
           </td>
           <td>
             <?php if(@$data['status']=='tolak') : ?>
-              <label class='text-danger'>DITOLAK</label>
+               <label data-toggle="modal" style="cursor: pointer !important;" data-target="#verifikasiAgenda<?=$data['id']?>"><label class='text-danger'>DITOLAK</label></label>
               <?php else : ?>
-                <?=(@$data['status']=='proses') ? "<label class='text-warning'>PROSES</label>": "<label class='text-success'>SELESAI</label>";?>
+               <label data-toggle="modal" style="cursor: pointer !important;" data-target="#verifikasiAgenda<?=$data['id']?>"><?=(@$data['status']=='proses') ? "<label class='text-warning'>PROSES</label>": "<label class='text-success'>SELESAI</label>";?></label>
               <?php endif; ?>
+
             </td>
             <td nowrap="">
               <?php  if(in_array($_SESSION['level'],array('1'))) : ?>
@@ -70,10 +71,38 @@
                 <a href="<?php echo base_url() ?>sppd/pelaporan?id=<?php echo $data['id'] ?>" class="btn btn-success"><i class="fa fa-folder-open"></i> Pelaporan</a>
                 <?php  if(in_array($_SESSION['level'],array('2'))) : ?>
                  <a href="<?php echo base_url() ?>sppd/cetak_sppd?id=<?php echo $data['id'] ?>" class="btn btn-danger"><i class="fa fa-print"></i> Cetak SPPD</a>
+                 <a href="<?php echo base_url() ?>sppd/cetak_lampiran_sppd?id=<?php echo $data['id'] ?>" class="btn btn-info"><i class="fa fa-print"></i> Cetak Lampiran SPPD</a>
                <?php endif; ?>
              <?php endif; ?>
            </td>
          </tr> 
+
+         <div id="verifikasiAgenda<?=$data['id']?>" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Verifikasi Laporan</h4>
+              </div>
+              <div class="modal-body">
+                <form action="" method="POST">
+                  <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
+                  <label>Verifikasi</label>
+                  <select class="form-control" name="status" required="">
+                    <option value="setuju" <?=($data['status']=='setuju') ? "selected" : "";?>>Setuju</option>
+                    <option value="tolak"  <?=($data['status']=='tolak') ? "selected" : "";?>>Tolak</option>
+                  </select>
+                  <label>Catatan</label>
+                  <textarea class="form-control" disabled name="catatan" rows="10" cols="10" style="width: 50vh !important; height: 20vh;"><?=$data['catatan'];?></textarea>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
        <?php endforeach; ?>
      </tbody>
    </table>

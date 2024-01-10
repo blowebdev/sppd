@@ -34,13 +34,10 @@
 	</table>
 
 	<div class="separator"></div>
-	<br>
-	<center>
+	<center style="float: right;">
 		<b style="text-align: center;">SURAT TUGAS</b><br>
 		<b style="text-align: center;">Nomor: 800/186/415.16.19.32/2023</b>
 	</center>
-	<br>
-	<br>
 	<?php
 	$showTanggal = $this->db->select("*, DATE(tanggal_mulai) as mulai, DATE(tanggal_selesai) as selesai, TIME(tanggal_mulai) as jam_mulai, TIME(tanggal_selesai) as jam_selesai")->get_where("m_agenda",array('id'=>$_REQUEST['id']))->row_array();
 	?>
