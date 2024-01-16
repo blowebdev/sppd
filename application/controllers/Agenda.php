@@ -46,6 +46,14 @@ class agenda extends CI_Controller {
 		$config['max_height']           = 10000;
 		$this->load->library('upload', $config);
 
+		$json_url = "https://maps.googleapis.com/maps/api/directions/json?origin=".$_REQUEST['lat'].",".$_REQUEST['long']."&destination=".$_REQUEST['lat2'].",".$_REQUEST['long2']."&key=AIzaSyBTgPmRwGjuwyazUzzZl6CosQTw1qpUDtY&mode=motorcycle";
+		$json = file_get_contents($json_url);
+		$data = json_decode($json, TRUE);
+		$jarak_motor = $data['routes'][0]['legs'][0]['distance']['text'];
+		$estimasi_waktu_motor = $data['routes'][0]['legs'][0]['duration']['text'];
+		$jarak_fix = str_replace('km','', $jarak_motor);
+		$total_dana = $jarak_fix * 4000;
+
 		// if($_FILES['file']['name']!="") {
 		// 	if (!$this->upload->do_upload('file')){
 		// 		echo $this->upload->display_errors();
@@ -69,8 +77,13 @@ class agenda extends CI_Controller {
 			'tanggal_surat' => $_REQUEST['tanggal_surat'],
 			'perihal' => $_REQUEST['perihal'],
 			'id_surat' => $_REQUEST['id_surat'],
+			'lokasi'=>$_REQUEST['lokasi_tujuan'],
+			'berangkat'=>$_REQUEST['berangkat_dari'],
 			// 'file' => $set_file,
 			'status' => 'proses',
+			'jarak'=>$jarak_fix,
+			'lat_long1'=>$_REQUEST['lat'].",".$_REQUEST['long'],
+			'lat_long2'=>$_REQUEST['lat2'].",".$_REQUEST['long2'],
 		);
 
 

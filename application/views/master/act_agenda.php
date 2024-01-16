@@ -21,6 +21,8 @@
 <br>
 <?php 
 $rows = $this->db->get_where("m_agenda",array('id'=>@$_REQUEST['id']))->row_array();
+$latlong1 = explode(',', @$rows['lat_long1']);
+$latlong2 = explode(',', @$rows['lat_long2']);
 echo @$this->session->flashdata('alert')['alert'];
 if(isset($_SESSION['alert'])){
     unset($_SESSION['alert']);
@@ -113,6 +115,23 @@ if(isset($_SESSION['alert'])){
             <input type="text" name="tempat" value="<?php echo @$rows['tempat']; ?>" id="tempat" class="form-control" required>
           </div>
         </div>
+
+          <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">Berangkat Dari</label>
+              <div class="col-sm-10">
+                <input type="text" id="searchTextField" name="berangkat_dari" value="<?php echo @$rows['berangkat']; ?>" class="form-control" required>
+                <input type="hidden" name="lat" value="<?php echo @$latlong1[0]; ?>" id="lat">
+                <input type="hidden" name="long" value="<?php echo @$latlong1[1]; ?>" id="long">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputtext3" class="col-sm-2 control-label">Lokasi Tujuan</label>
+              <div class="col-sm-10">
+                <input type="text" id="searchTextField2" placeholder="Masukan Tujuan" name="lokasi_tujuan" onkeyup="showLatLong()" value="<?php echo @$rows['lokasi']; ?>" class="form-control" required>
+                 <input type="hidden" name="lat2" value="<?php echo @$latlong2[0]; ?>" id="lat2">
+                  <input type="hidden" name="long2" value="<?php echo @$latlong2[1]; ?>" id="long2">
+              </div>
+            </div>
         <div class="form-group">
           <div class="col-sm-10">
             <div class="row">
@@ -141,3 +160,56 @@ if(isset($_SESSION['alert'])){
 </div>
 <br>
 <br>
+
+<script
+src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBTgPmRwGjuwyazUzzZl6CosQTw1qpUDtY&callback=initMap&libraries=places&v=weekly"
+defer
+></script>
+
+ <script>
+
+      function initMap() {
+            var input = document.getElementById('searchTextField');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+              google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                  var place = autocomplete.getPlace();
+                  var lat = place.geometry.location.lat();
+                  var long = place.geometry.location.lng();
+                  var panjang = place.address_components.length;
+                  var index =place.address_components;
+                  document.getElementById('lat').value = place.geometry.location.lat();
+                  document.getElementById('long').value = place.geometry.location.lng();
+              });
+        }
+
+        function showLatLong(){
+           var input = document.getElementById('searchTextField2');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+              google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                  var place = autocomplete.getPlace();
+                  var lat = place.geometry.location.lat();
+                  var long = place.geometry.location.lng();
+                  var panjang = place.address_components.length;
+                  var index =place.address_components;
+                  document.getElementById('lat2').value = place.geometry.location.lat();
+                  document.getElementById('long2').value = place.geometry.location.lng();
+                  showDestination();
+              });
+        }
+
+        function showDestination() {
+            var lat1 = $("#lat").val();
+            var long1 = $("#long").val(); 
+
+            var lat2 = $("#lat2").val();
+            var long2 = $("#long2").val();
+
+            $.ajax({
+                url: 'http://maps.googleapis.com/maps/api/directions/json?origin='+lat1+','+long2+'&destination='+lat2+','+long2+'&key=AIzaSyBTgPmRwGjuwyazUzzZl6CosQTw1qpUDtY&mode=motorcycle',
+                type: 'get',
+                success: function (data) {
+                  console.log(data);
+                }
+              });
+        }
+    </script>
